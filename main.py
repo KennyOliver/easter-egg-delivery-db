@@ -5,12 +5,18 @@ def search(chosen_file):
   reader = csv.reader(current_csv)
   
   for record in reader:
-    print(record)
+    manufacturer = record[0]
+    egg_type = record[1]
+    size = record[2]
+    price = record[3]
+    quantity = record[4]
+    #print(record)
+    print(f"{manufacturer},{egg_type},{size},£{price},{quantity}")
   
   current_csv.close()
 #====================
 # MAIN PROGRAM
 search("order1")
 
-#====================
-""" Use python -c 'print("Hi!")' to run in Bash cmd line """
+#========NOTE========
+""" Use python -c 'function(argument)' to run in Bash cmd line """
