@@ -1,3 +1,3 @@
-Nesters,milk,medium,3,25
-Nesters,plain,small,1,25
-Smiths,plain,small,1,10
+Nesters,milk,medium,3,0.95,25
+Nesters,plain,small,1,0.90,25
+Smiths,plain,small,1,0.60,10

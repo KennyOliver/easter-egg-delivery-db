@@ -1,8 +1,8 @@
-Smiths,milk,small,1,50
-Smiths,plain,small,1,25
-Smiths,milk,large,2,10
-Amsters,milk,medium,2,40
-Amsters,milk,large,4,10
-E&S,milk,large,6,15
-E&S,plain,large,7,20
-E&S,white,large,7,10
+Smiths,milk,small,1,0.60,50
+Smiths,plain,small,1,0.60,25
+Smiths,milk,large,2,0.80,10
+Amsters,milk,medium,2,0.50,40
+Amsters,milk,large,4,0.60,10
+E&S,milk,large,6,1.10,15
+E&S,plain,large,7,1.10,20
+E&S,white,large,7,1.10,10
