@@ -25,9 +25,9 @@ def scrape_csv(chosen_file):
 #====================
 def menu():
   print("Choose the desired file:")
-  print("\t[1] order1.csv\n\t[2] order2.csv\n\t[3] order3.csv")
+  print("\t[1] order1.csv\n\t[2] order2.csv\n\t[3] order3.csv\n\t[4] order4.csv")
   user_pick_file = input("\t--> ")
-  while user_pick_file not in ['1','2','3'] or len(user_pick_file) != 1:
+  while user_pick_file not in ['1','2','3','4'] or len(user_pick_file) != 1:
     user_pick_file = input("\t--> ")
   
   if user_pick_file == '1':
@@ -36,6 +36,8 @@ def menu():
     scrape_csv("order2")
   elif user_pick_file == '3':
     scrape_csv("order3")
+  elif user_pick_file == '4':
+    scrape_csv("order4")
 #====================
 # MAIN PROGRAM
 print("<-- Easter Egg Delivery DB -->")
