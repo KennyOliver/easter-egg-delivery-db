@@ -1,6 +1,6 @@
 import csv
 #====================
-def scrape_csv(chosen_file):
+def scrape_csv(chosen_file,search_query):
   print(f"<-- {chosen_file}.csv -->")
   
   current_csv = open(rf"{chosen_file}.csv",'r') #open using filename passed through function
@@ -16,31 +16,39 @@ def scrape_csv(chosen_file):
     price = record[3]
     shipping = record[4]
     quantity = record[5]
-    print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
-    record_count += 1
-    total_eggs += int(quantity)
+    
+    if search_query in record:
+      print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
+      record_count += 1
+      total_eggs += int(quantity)
   
   print("-" * 30) #UI visual divider
-  print(f"{record_count} results found!")
-  print(f"{total_eggs} eggs ordered in total!")
+  print(f"Using \"{search_query}\"...")
+  print(f"\t{record_count} results found!")
+  print(f"\t{total_eggs} eggs ordered in total!")
   
   current_csv.close()
 #====================
 def menu():
-  print("Choose the desired file:")
+  print("Choose the desired file to scrape:")
   print("\t[1] order1.csv\n\t[2] order2.csv\n\t[3] order3.csv\n\t[4] order4.csv")
   user_pick_file = input("\t--> ")
   while user_pick_file not in ['1','2','3','4'] or len(user_pick_file) != 1:
     user_pick_file = input("\t--> ")
   
+  user_query = input("Enter query\n\t--> ")
+  while len(user_query) < 1:
+    user_query = input("\t--> ")
+  
+  print("-" * 30)
   if user_pick_file == '1':
-    scrape_csv("order1")
+    scrape_csv("order1",user_query)
   elif user_pick_file == '2':
-    scrape_csv("order2")
+    scrape_csv("order2",user_query)
   elif user_pick_file == '3':
-    scrape_csv("order3")
+    scrape_csv("order3",user_query)
   elif user_pick_file == '4':
-    scrape_csv("order4")
+    scrape_csv("order4",user_query)
 #====================
 # MAIN PROGRAM
 print("<-- Easter Egg Delivery DB -->")
@@ -62,7 +70,7 @@ Nesters: small = 0.90 medium = 0.95 large = 0.99
 Success criteria
 1. Read the data stored as records in the file.
 2. Store each record in a 2D array within the program.
-3. Display how many Easter eggs have ordered in total
-4. Display how many Easter eggs from a particular manufacturer have been ordered
-5.The program will display how many milk, plain and white chocolate eggs have been ordered.
+3. Display total Easter eggs ordered
+4. Display total Easter eggs ordered from a particular manufacturer
+5.The program will display total milk, plain and white chocolate eggs have been ordered.
 """
