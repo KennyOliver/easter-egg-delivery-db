@@ -29,6 +29,34 @@ def scrape_csv(chosen_file,search_query):
   
   current_csv.close()
 #====================
+def all_in_csv(chosen_file):
+  print(f"<-- {chosen_file}.csv -->")
+  
+  current_csv = open(rf"{chosen_file}.csv",'r') #open using filename passed through function
+  reader = csv.reader(current_csv)
+  
+  record_count = 0 #counts number of records
+  total_eggs = 0
+  
+  for record in reader:
+    manufacturer = record[0]
+    egg_type = record[1]
+    size = record[2]
+    price = record[3]
+    shipping = record[4]
+    quantity = record[5]
+    
+    print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
+    record_count += 1
+    total_eggs += int(quantity)
+  
+  print("-" * 30) #UI visual divider
+  print(f"Using \"*\" wildcard...")
+  print(f"\t{record_count} results found!")
+  print(f"\t{total_eggs} eggs ordered in total!")
+  
+  current_csv.close()
+#====================
 def menu():
   print("Choose the desired file to scrape:")
   print("\t[1] order1.csv\n\t[2] order2.csv\n\t[3] order3.csv\n\t[4] order4.csv")
@@ -36,19 +64,31 @@ def menu():
   while user_pick_file not in ['1','2','3','4'] or len(user_pick_file) != 1:
     user_pick_file = input("\t--> ")
   
-  user_query = input("Enter query\n\t--> ")
+  user_query = input("Enter query\n\t[*] To print all\n\t--> ")
   while len(user_query) < 1:
     user_query = input("\t--> ")
   
   print("-" * 30)
   if user_pick_file == '1':
-    scrape_csv("order1",user_query)
+    if user_query != '*':
+      scrape_csv("order1",user_query)
+    else:
+      all_in_csv("order1")
   elif user_pick_file == '2':
-    scrape_csv("order2",user_query)
+    if user_query != '*':
+      scrape_csv("order2",user_query)
+    else:
+      all_in_csv("order2")
   elif user_pick_file == '3':
-    scrape_csv("order3",user_query)
+    if user_query != '*':
+      scrape_csv("order3",user_query)
+    else:
+      all_in_csv("order3")
   elif user_pick_file == '4':
-    scrape_csv("order4",user_query)
+    if user_query != '*':
+      scrape_csv("order4",user_query)
+    else:
+      all_in_csv("order4")
 #====================
 # MAIN PROGRAM
 print("<-- Easter Egg Delivery DB -->")
