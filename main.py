@@ -7,6 +7,7 @@ def scrape_csv(chosen_file):
   reader = csv.reader(current_csv)
   
   record_count = 0 #counts number of records
+  total_eggs = 0
   
   for record in reader:
     manufacturer = record[0]
@@ -17,9 +18,11 @@ def scrape_csv(chosen_file):
     quantity = record[5]
     print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
     record_count += 1
+    total_eggs += int(quantity)
   
   print("-" * 30) #UI visual divider
   print(f"{record_count} results found!")
+  print(f"{total_eggs} eggs ordered in total!")
   
   current_csv.close()
 #====================
@@ -53,4 +56,13 @@ Smiths: small = 0.60 medium = 0.70 large = 0.80
 Amsters: small = 0.40 medium = 0.50 large = 0.60
 E&S: small = 0.90 medium = 1.00 large = 1.10
 Nesters: small = 0.90 medium = 0.95 large = 0.99
+"""
+
+"""
+Success criteria
+1. Read the data stored as records in the file.
+2. Store each record in a 2D array within the program.
+3. Display how many Easter eggs have ordered in total
+4. Display how many Easter eggs from a particular manufacturer have been ordered
+5.The program will display how many milk, plain and white chocolate eggs have been ordered.
 """
