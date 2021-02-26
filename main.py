@@ -8,6 +8,8 @@ def scrape_csv(chosen_file,search_query):
   
   record_count = 0 #counts number of records
   total_eggs = 0
+  total_cost = 0
+  total_shipping = 0
   
   for record in reader:
     manufacturer = record[0]
@@ -21,11 +23,17 @@ def scrape_csv(chosen_file,search_query):
       print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
       record_count += 1
       total_eggs += int(quantity)
+      total_cost += float(price)
+      total_shipping += float(shipping)
   
   print("-" * 30) #UI visual divider
-  print(f"Using \"{search_query}\"...")
-  print(f"\t{record_count} results found!")
-  print(f"\t{total_eggs} eggs ordered in total!")
+  print(f"Using \"*\" wildcard...")
+  print(f"\tResults: {record_count}")
+  print(f"\tTotal eggs ordered: {total_eggs}")
+  print(f"\tEggs cost: £{total_cost}")
+  print(f"\tCost with shipping: £{total_cost + total_shipping}")
+  avg_egg_cost = (total_cost) / total_eggs
+  print(f"\tAvg cost per egg (no shipping): £{round(avg_egg_cost,3)}")
   
   current_csv.close()
 #====================
@@ -37,6 +45,8 @@ def all_in_csv(chosen_file):
   
   record_count = 0 #counts number of records
   total_eggs = 0
+  total_cost = 0
+  total_shipping = 0
   
   for record in reader:
     manufacturer = record[0]
@@ -49,11 +59,17 @@ def all_in_csv(chosen_file):
     print(f"{manufacturer},{egg_type},{size},£{price},£{shipping},{quantity}") #print each record with same appearance as a CSV file
     record_count += 1
     total_eggs += int(quantity)
+    total_cost += float(price)
+    total_shipping += float(shipping)
   
   print("-" * 30) #UI visual divider
   print(f"Using \"*\" wildcard...")
-  print(f"\t{record_count} results found!")
-  print(f"\t{total_eggs} eggs ordered in total!")
+  print(f"\tResults: {record_count}")
+  print(f"\tTotal eggs ordered: {total_eggs}")
+  print(f"\tEggs cost: £{total_cost}")
+  print(f"\tCost with shipping: £{total_cost + total_shipping}")
+  avg_egg_cost = (total_cost) / total_eggs
+  print(f"\tAvg cost per egg (no shipping): £{round(avg_egg_cost,3)}")
   
   current_csv.close()
 #====================
