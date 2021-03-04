@@ -1,6 +1,7 @@
 import csv
 #====================
 def scrape_csv(chosen_file,search_query):
+  """ Print records in file that match query """
   current_csv = open(rf"{chosen_file}.csv",'r') #open filename passed through function
   reader = csv.reader(current_csv)
   
@@ -20,13 +21,14 @@ def scrape_csv(chosen_file,search_query):
       total_cost += float(price)
       total_shipping += float(shipping)
   
-  print("-" * 30) #UI visual divider
+  print("-" * 30)
   print(f"Using \"{search_query}\" query...")
   stats(record_count,total_eggs,total_cost,total_shipping)
   
   current_csv.close()
 #====================
 def all_in_csv(chosen_file):
+  """ Print all records in file """
   current_csv = open(rf"{chosen_file}.csv",'r') #open filename passed through function
   reader = csv.reader(current_csv)
   
@@ -45,13 +47,14 @@ def all_in_csv(chosen_file):
     total_cost += float(price)
     total_shipping += float(shipping)
   
-  print("-" * 30) #UI visual divider
+  print("-" * 30)
   print("Using \"*\" wildcard...")
   stats(record_count,total_eggs,total_cost,total_shipping)
   
   current_csv.close()
 #====================
 def stats(count,eggs,cost,shipping):
+  """ Print stats for query results """
   print(f"{count} results")
   print(f"\tTotal eggs: {eggs}")
   print(f"\tTotal eggs cost: £{cost:.2f}")
@@ -63,6 +66,7 @@ def stats(count,eggs,cost,shipping):
     print(f"\tAvg. egg (shipping): ZeroDivisionError")
 #====================
 def menu():
+  """ User menu """
   print("Choose the desired file to scrape:")
   for i in range(1,4+1):
     print(f"\t[{i}] order{i}.csv")
@@ -70,7 +74,7 @@ def menu():
   while file_choice not in ['1','2','3','4'] or len(file_choice) != 1:
     file_choice = input("\t--> ")
   
-  print("-" * 30)
+  print("-" * 30) #UI visual divider
   
   print("Enter a query\n\t[*] To print all")
   user_query = input("\t--> ")
@@ -100,13 +104,4 @@ Smiths: small = 0.60 medium = 0.70 large = 0.80
 Amsters: small = 0.40 medium = 0.50 large = 0.60
 E&S: small = 0.90 medium = 1.00 large = 1.10
 Nesters: small = 0.90 medium = 0.95 large = 0.99
-"""
-
-"""
-Success criteria
-1. Read the data stored as records in the file.
-2. Store each record in a 2D array within the program.
-3. Display total Easter eggs ordered
-4. Display total Easter eggs ordered from a particular manufacturer
-5.The program will display total milk, plain and white chocolate eggs have been ordered.
 """
