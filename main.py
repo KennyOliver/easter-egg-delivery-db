@@ -87,7 +87,7 @@ def menu():
     all_in_csv(f"order{file_choice}")
 #====================
 # MAIN PROGRAM
-print("<-- Easter Egg Delivery DB -->")
+print("<-- Easter Egg Orders DB -->")
 print("-" * 30)
 menu()
 
