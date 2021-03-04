@@ -12,15 +12,8 @@ def scrape_csv(chosen_file,search_query):
   print(f"<-- {chosen_file}.csv -->")
   print("brand,type,size,price,shipping,quantity")
   next(reader,None) #skips header line
-  for record in reader:
-    brand = record[0]
-    egg_type = record[1]
-    size = record[2]
-    price = record[3]
-    shipping = record[4]
-    quantity = record[5]
-    
-    if search_query in record:
+  for brand,egg_type,size,price,shipping,quantity in reader:
+    if search_query in [brand,egg_type,size,price,shipping,quantity]:
       print(f"{brand},{egg_type},{size},£{price},£{shipping},{quantity}")
       record_count += 1
       total_eggs += int(quantity)
@@ -60,14 +53,14 @@ def all_in_csv(chosen_file):
 #====================
 def stats(count,eggs,cost,shipping):
   print(f"{count} results")
-  print(f"\tTotal eggs ordered: {eggs}")
+  print(f"\tTotal eggs: {eggs}")
   print(f"\tTotal eggs cost: £{cost:.2f}")
   print(f"\t\t + shipping: £{(cost + shipping):.2f}")
   try:
     avg_egg_cost = (cost + shipping) / count
-    print(f"\tAvg. cost (shipping): £{avg_egg_cost:.2f}")
+    print(f"\tAvg. egg (shipping): £{avg_egg_cost:.2f}")
   except ZeroDivisionError:
-    print(f"\tAvg. cost (shipping): ZeroDivisionError")
+    print(f"\tAvg. egg (shipping): ZeroDivisionError")
 #====================
 def menu():
   print("Choose the desired file to scrape:")
