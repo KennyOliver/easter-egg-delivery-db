@@ -1,8 +1,6 @@
 import csv
 #====================
 def scrape_csv(chosen_file,search_query):
-  print(f"<-- {chosen_file}.csv -->")
-  
   current_csv = open(rf"{chosen_file}.csv",'r') #open filename passed through function
   reader = csv.reader(current_csv)
   
@@ -11,6 +9,8 @@ def scrape_csv(chosen_file,search_query):
   total_cost = 0
   total_shipping = 0
   
+  print(f"<-- {chosen_file}.csv -->")
+  print("brand,type,size,price,shipping,quantity")
   next(reader,None) #skips header line
   for record in reader:
     brand = record[0]
@@ -34,8 +34,6 @@ def scrape_csv(chosen_file,search_query):
   current_csv.close()
 #====================
 def all_in_csv(chosen_file):
-  print(f"<-- {chosen_file}.csv -->")
-  
   current_csv = open(rf"{chosen_file}.csv",'r') #open filename passed through function
   reader = csv.reader(current_csv)
   
@@ -44,6 +42,8 @@ def all_in_csv(chosen_file):
   total_cost = 0
   total_shipping = 0
   
+  print(f"<-- {chosen_file}.csv -->")
+  print("brand,type,size,price,shipping,quantity")
   next(reader,None) #skips header line
   for brand,egg_type,size,price,shipping,quantity in reader:
     print(f"{brand},{egg_type},{size},£{price},£{shipping},{quantity}")
@@ -61,10 +61,13 @@ def all_in_csv(chosen_file):
 def stats(count,eggs,cost,shipping):
   print(f"{count} results")
   print(f"\tTotal eggs ordered: {eggs}")
-  print(f"\tEggs cost: £{cost}")
-  print(f"\tCost with shipping: £{cost + shipping}")
-  avg_egg_cost = (cost) / shipping
-  print(f"\tAvg cost per egg (no shipping): £{round(avg_egg_cost,3)}")
+  print(f"\tTotal eggs cost: £{cost:.2f}")
+  print(f"\t\t + shipping: £{(cost + shipping):.2f}")
+  try:
+    avg_egg_cost = (cost + shipping) / count
+    print(f"\tAvg. cost (shipping): £{avg_egg_cost:.2f}")
+  except ZeroDivisionError:
+    print(f"\tAvg. cost (shipping): ZeroDivisionError")
 #====================
 def menu():
   print("Choose the desired file to scrape:")
@@ -74,7 +77,9 @@ def menu():
   while file_choice not in ['1','2','3','4'] or len(file_choice) != 1:
     file_choice = input("\t--> ")
   
-  print("Enter query\n\t[*] To print all")
+  print("-" * 30)
+  
+  print("Enter a query\n\t[*] To print all")
   user_query = input("\t--> ")
   while len(user_query) < 1:
     user_query = input("\t--> ")
@@ -85,6 +90,8 @@ def menu():
     scrape_csv(f"order{file_choice}",user_query)
   elif user_query == "*":
     all_in_csv(f"order{file_choice}")
+  
+  print("-" * 30)
 #====================
 # MAIN PROGRAM
 print("<-- Easter Egg Orders DB -->")
