@@ -11,11 +11,11 @@ def scrape_csv(chosen_file,search_query):
   total_shipping = 0
   
   print(f"<-- {chosen_file}.csv -->")
-  print("brand,type,size,price,shipping,quantity")
+  print("brand|type|size|price|shipping|quantity")
   next(reader,None) #skips header line
   for brand,egg_type,size,price,shipping,quantity in reader:
     if search_query in [brand,egg_type,size,price,shipping,quantity]:
-      print(f"{brand},{egg_type},{size},£{price},£{shipping},{quantity}")
+      print(f"{brand}|{egg_type}|{size}|£{price}|£{shipping}|{quantity}")
       record_count += 1
       total_eggs += int(quantity)
       total_cost += float(price)
@@ -38,10 +38,10 @@ def all_in_csv(chosen_file):
   total_shipping = 0
   
   print(f"<-- {chosen_file}.csv -->")
-  print("brand,type,size,price,shipping,quantity")
+  print("brand|type|size|price|shipping|quantity")
   next(reader,None) #skips header line
   for brand,egg_type,size,price,shipping,quantity in reader:
-    print(f"{brand},{egg_type},{size},£{price},£{shipping},{quantity}")
+    print(f"{brand}|{egg_type}|{size}|£{price}|£{shipping}|{quantity}")
     record_count += 1
     total_eggs += int(quantity)
     total_cost += float(price)
@@ -55,7 +55,10 @@ def all_in_csv(chosen_file):
 #====================
 def stats(count,eggs,cost,shipping):
   """ Print stats for query results """
-  print(f"{count} results")
+  if count == 1:
+    print(f"{count} result found!")
+  else:
+    print(f"{count} results found!")
   print(f"\tTotal eggs: {eggs}")
   print(f"\tTotal eggs cost: £{cost:.2f}")
   print(f"\t\t + shipping: £{(cost + shipping):.2f}")
@@ -63,11 +66,11 @@ def stats(count,eggs,cost,shipping):
     avg_egg_cost = (cost + shipping) / count
     print(f"\tAvg. egg (shipping): £{avg_egg_cost:.2f}")
   except ZeroDivisionError:
-    print(f"\tAvg. egg (shipping): ZeroDivisionError")
+    print(f"\tAvg. egg (shipping): £0.00")
 #====================
 def menu():
   """ User menu """
-  print("Choose the desired file to scrape:")
+  print("Choose a file to scrape:")
   for i in range(1,4+1):
     print(f"\t[{i}] order{i}.csv")
   file_choice = input("\t--> ")
@@ -94,6 +97,7 @@ def menu():
 print("<-- Easter Egg Orders DB -->")
 print("-" * 30)
 menu()
+
 
 #========NOTE========
 """ Use python -c 'function(argument)' to run in Bash cmd line """
